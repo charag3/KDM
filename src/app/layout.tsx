@@ -28,10 +28,10 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 export const metadata: Metadata = {
-  title: 'KDM — Kubota & Polaris Morelia',
+  title: 'KDM Seminuevos — Maquinaria Agrícola Usada · Morelia',
   description:
-    'Distribuidor autorizado Kubota y Polaris en Morelia, Michoacán. Tractores agrícolas, implementos y vehículos todo terreno.',
-  keywords: ['Kubota Morelia', 'Polaris Morelia', 'tractores Michoacán', 'RZR Morelia', 'KDM Tecnologías'],
+    'Compra y vende maquinaria agrícola y vehículos seminuevos verificados en Morelia, Michoacán. Distribuidor KDM.',
+  keywords: ['Kubota Morelia', 'tractores seminuevos', 'maquinaria usada Michoacán', 'KDM Seminuevos', 'consignar tractor'],
 }
 
 export default function RootLayout({

@@ -27,17 +27,17 @@ const fuenteStats = [
 ]
 
 const actividadReciente = [
-  { time: '2026-05-10', lead: 'Ing. Roberto Villanueva', evento: 'Nuevo lead — Formulario web', vertical: 'Tecnologías' },
-  { time: '2026-05-09', lead: 'Lupita Estrada', evento: 'Lead contactado por WhatsApp', vertical: 'Tecnologías' },
-  { time: '2026-05-09', lead: 'Carlos Mendoza', evento: 'Cotización enviada — $1,350,000 MXN', vertical: 'Offroad' },
-  { time: '2026-05-08', lead: 'Carlos Mendoza', evento: 'Primer contacto vía Instagram', vertical: 'Offroad' },
-  { time: '2026-05-07', lead: 'Fam. Gutiérrez', evento: 'Solicitud de consignación recibida', vertical: 'Tecnologías' },
-  { time: '2026-05-06', lead: 'Ing. Paola Reyes', evento: 'Venta cerrada — $980,000 MXN', vertical: 'Tecnologías' },
+  { time: '2026-05-10', lead: 'Ing. Roberto Villanueva', evento: 'Nuevo lead — Formulario web', vertical: 'Compra' },
+  { time: '2026-05-09', lead: 'Lupita Estrada', evento: 'Lead contactado por WhatsApp', vertical: 'Compra' },
+  { time: '2026-05-09', lead: 'Carlos Mendoza', evento: 'Cotización enviada — $1,350,000 MXN', vertical: 'Compra' },
+  { time: '2026-05-08', lead: 'Carlos Mendoza', evento: 'Primer contacto vía Instagram', vertical: 'Compra' },
+  { time: '2026-05-07', lead: 'Fam. Gutiérrez', evento: 'Solicitud de consignación recibida', vertical: 'Consignación' },
+  { time: '2026-05-06', lead: 'Ing. Paola Reyes', evento: 'Venta cerrada — $980,000 MXN', vertical: 'Compra' },
 ]
 
 const verticalSplit = [
-  { label: 'Tecnologías', leads: 4, valor: '$1,795,000', pct: 67, color: 'bg-kdm-green' },
-  { label: 'Offroad', leads: 2, valor: '$1,535,000', pct: 33, color: 'bg-orange-400' },
+  { label: 'Compra', leads: 4, valor: '$1,795,000', pct: 67, color: 'bg-green-500' },
+  { label: 'Consignación', leads: 2, valor: '$1,535,000', pct: 33, color: 'bg-amber-400' },
 ]
 
 export default function DashboardPage() {
@@ -48,7 +48,7 @@ export default function DashboardPage() {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div>
             <h1 className="text-xl font-semibold text-gray-900">Dashboard</h1>
-            <p className="text-sm text-gray-500 mt-0.5">KDM Tecnologías + Offroad · Panel de control</p>
+            <p className="text-sm text-gray-500 mt-0.5">KDM Seminuevos · Panel de control</p>
           </div>
           <div className="flex items-center gap-3">
             <RoleSwitcher />
@@ -116,7 +116,7 @@ export default function DashboardPage() {
                   </div>
                   <div className="h-3 bg-gray-100 rounded-full overflow-hidden mb-1">
                     <div
-                      className={`h-full rounded-full ${v.label === 'Tecnologías' ? 'bg-green-500' : 'bg-orange-400'}`}
+                      className={`h-full rounded-full ${v.label === 'Compra' ? 'bg-green-500' : 'bg-amber-400'}`}
                       style={{ width: `${v.pct}%` }}
                     />
                   </div>
@@ -178,7 +178,7 @@ export default function DashboardPage() {
                 <div key={i} className="px-5 py-3 flex items-start gap-3">
                   <span
                     className="mt-0.5 w-2 h-2 rounded-full shrink-0"
-                    style={{ backgroundColor: a.vertical === 'Tecnologías' ? '#3D6B1F' : '#F97316', marginTop: '6px' }}
+                    style={{ backgroundColor: a.vertical === 'Compra' ? '#22c55e' : '#f59e0b', marginTop: '6px' }}
                   />
                   <div className="min-w-0 flex-1">
                     <p className="text-sm text-gray-800 leading-tight">{a.evento}</p>
@@ -194,10 +194,10 @@ export default function DashboardPage() {
         {/* Quick actions */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {[
-            { label: 'CRM Pipeline', href: '/crm', icon: '📋', desc: 'Ver todos los leads' },
-            { label: 'Vendedores', href: '/admin/vendedores', icon: '👥', desc: 'Gestionar equipo' },
-            { label: 'Productos', href: '/admin/productos', icon: '🚜', desc: 'Catálogo completo' },
-            { label: 'Sitio público', href: '/', icon: '🌐', desc: 'Ver como cliente' },
+            { label: 'Pipeline de ventas', href: '/crm', icon: '📋', desc: 'Ver todos los leads' },
+            { label: 'Equipo de ventas', href: '/admin/vendedores', icon: '👥', desc: 'Gestionar equipo' },
+            { label: 'Inventario seminuevos', href: '/admin/productos', icon: '🚜', desc: 'Catálogo completo' },
+            { label: 'Ver portal público', href: '/', icon: '🌐', desc: 'Ver como cliente' },
           ].map((a) => (
             <Link
               key={a.href}

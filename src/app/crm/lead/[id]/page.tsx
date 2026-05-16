@@ -1,5 +1,5 @@
 // CRM Lead Detail — /crm/lead/[id]
-// Internal demo view. Static data. Lead id=3 is the rich example (Club Offroad Morelia).
+// Internal demo view. Static data.
 
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -8,21 +8,22 @@ type Lead = {
   id: string
   nombre: string
   empresa: string
+  telefono: string
   interes: string
   valor: string
   fuente: string
   fecha: string
   stage: string
-  vertical: 'Tecnologías' | 'Offroad'
+  vertical: 'Compra' | 'Consignación'
 }
 
 const leads: Lead[] = [
-  { id: '1', nombre: 'Ing. Roberto Villanueva', empresa: 'Rancho Villanueva', interes: 'Kubota M5111 · Financiamiento', valor: '$420,000 MXN', fuente: 'Formulario web', fecha: '2026-05-10', stage: 'Nuevo', vertical: 'Tecnologías' },
-  { id: '2', nombre: 'Lupita Estrada', empresa: 'Aguacates La Huerta', interes: 'Kubota B2601 · Compra directa', valor: '$215,000 MXN', fuente: 'WhatsApp', fecha: '2026-05-09', stage: 'Contactado', vertical: 'Tecnologías' },
-  { id: '3', nombre: 'Carlos Mendoza', empresa: 'Club Offroad Morelia', interes: '3x Polaris RZR Pro R', valor: '$1,350,000 MXN', fuente: 'Instagram', fecha: '2026-05-08', stage: 'Cotizado', vertical: 'Offroad' },
-  { id: '4', nombre: 'Fam. Gutiérrez', empresa: 'Rancho Los Pinos', interes: 'Tractor usado consignación', valor: '$180,000 MXN', fuente: 'Marketplace', fecha: '2026-05-07', stage: 'Nuevo', vertical: 'Tecnologías' },
-  { id: '5', nombre: 'Ing. Paola Reyes', empresa: 'Agro Reyes SA', interes: 'Kubota L3560 · 2 unidades', valor: '$980,000 MXN', fuente: 'Google', fecha: '2026-05-06', stage: 'Cerrado', vertical: 'Tecnologías' },
-  { id: '6', nombre: 'Marco Dávila', empresa: 'Personal', interes: 'Polaris Sportsman 570', valor: '$185,000 MXN', fuente: 'Formulario web', fecha: '2026-05-05', stage: 'Contactado', vertical: 'Offroad' },
+  { id: '1', nombre: 'Ing. Roberto Villanueva', empresa: 'Rancho Villanueva', telefono: '+52 443 100 0001', interes: 'Tractor Kubota B2601 seminuevo · Financiamiento', valor: '$195,000 MXN', fuente: 'Portal KDM', fecha: '2026-05-10', stage: 'Nuevo', vertical: 'Compra' },
+  { id: '2', nombre: 'Lupita Estrada', empresa: 'Aguacates La Huerta', telefono: '+52 443 100 0002', interes: 'Kubota L3301 seminuevo · Compra directa', valor: '$285,000 MXN', fuente: 'WhatsApp', fecha: '2026-05-09', stage: 'Contactado', vertical: 'Compra' },
+  { id: '3', nombre: 'Carlos Mendoza', empresa: 'Granja Mendoza', telefono: '+52 443 100 0003', interes: 'Kubota M5091 seminuevo · 1 unidad', valor: '$620,000 MXN', fuente: 'Instagram', fecha: '2026-05-08', stage: 'Cotizado', vertical: 'Compra' },
+  { id: '4', nombre: 'Fam. Gutiérrez', empresa: 'Rancho Los Pinos', telefono: '+52 443 100 0004', interes: 'Consignar Kubota L3560 2019 · 1,200 hrs', valor: '$380,000 MXN', fuente: 'Portal KDM', fecha: '2026-05-07', stage: 'Nuevo', vertical: 'Consignación' },
+  { id: '5', nombre: 'Ing. Paola Reyes', empresa: 'Agro Reyes SA', telefono: '+52 443 100 0005', interes: 'Kubota L4701 seminuevo · 2 unidades', valor: '$980,000 MXN', fuente: 'Google', fecha: '2026-05-06', stage: 'Cerrado', vertical: 'Compra' },
+  { id: '6', nombre: 'Marco Dávila', empresa: 'Ganadería Dávila', telefono: '+52 443 100 0006', interes: 'Consignar Kubota B2301 2020 · 800 hrs', valor: '$135,000 MXN', fuente: 'Portal KDM', fecha: '2026-05-05', stage: 'Contactado', vertical: 'Consignación' },
 ]
 
 const stages = ['Nuevo', 'Contactado', 'Cotizado', 'Cerrado']
@@ -31,12 +32,12 @@ const timeline: Record<string, { time: string; event: string }[]> = {
   '3': [
     { time: '2026-05-08 10:30', event: 'Lead recibido via Instagram' },
     { time: '2026-05-08 14:00', event: 'Primer contacto — WhatsApp enviado' },
-    { time: '2026-05-09 09:15', event: 'Cotización enviada por email — $1,350,000 MXN · 3 unidades RZR Pro R' },
+    { time: '2026-05-09 09:15', event: 'Cotización enviada por email — $620,000 MXN · 1 unidad M5091' },
   ],
 }
 
 const notas: Record<string, string> = {
-  '3': 'Carlos contactó por WhatsApp el 2026-05-08. Confirmó interés en 3 RZR Pro R para evento de mayo. Solicita cotización formal con tiempo de entrega.',
+  '3': 'Carlos contactó por Instagram el 2026-05-08. Confirma interés en Kubota M5091 para uso en granja. Solicita cotización con tiempo de entrega.',
 }
 
 export function generateStaticParams() {
@@ -57,29 +58,35 @@ export default async function LeadDetailPage({ params }: Props) {
   const nota = notas[id] ?? ''
 
   const verticalColor =
-    lead.vertical === 'Tecnologías'
-      ? { bg: '#e8f0e0', text: '#3D6B1F' }
-      : { bg: '#fff0e6', text: '#F97316' }
+    lead.vertical === 'Compra'
+      ? { bg: '#dcfce7', text: '#16a34a' }
+      : { bg: '#fef3c7', text: '#d97706' }
 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-white border-b border-gray-200 px-6 py-4">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Link href="/crm" className="text-sm text-gray-400 hover:text-gray-600 transition-colors">
-              ← Pipeline
-            </Link>
-            <span className="text-gray-200">|</span>
-            <h1 className="text-lg font-semibold text-gray-900">{lead.nombre}</h1>
-            <span
-              className="text-xs font-semibold px-2 py-0.5 rounded"
-              style={{ backgroundColor: verticalColor.bg, color: verticalColor.text }}
-            >
-              {lead.vertical}
-            </span>
+          <div className="min-w-0">
+            {/* Breadcrumb */}
+            <nav className="flex items-center gap-1.5 text-xs text-gray-400 mb-1.5">
+              <Link href="/crm" className="hover:text-gray-600 transition-colors">KDM Seminuevos</Link>
+              <span>/</span>
+              <Link href="/crm" className="hover:text-gray-600 transition-colors">CRM</Link>
+              <span>/</span>
+              <span className="text-gray-700 font-medium truncate">{lead.nombre}</span>
+            </nav>
+            <div className="flex items-center gap-3">
+              <h1 className="text-lg font-semibold text-gray-900 truncate">{lead.nombre}</h1>
+              <span
+                className="text-xs font-semibold px-2 py-0.5 rounded shrink-0"
+                style={{ backgroundColor: verticalColor.bg, color: verticalColor.text }}
+              >
+                {lead.vertical}
+              </span>
+            </div>
           </div>
-          <nav className="flex items-center gap-1">
+          <nav className="flex items-center gap-1 shrink-0 ml-4">
             <Link href="/dashboard" className="text-sm text-gray-500 hover:text-gray-900 px-3 py-1.5 rounded-lg hover:bg-gray-50 transition-colors">Dashboard</Link>
             <Link href="/crm" className="text-sm text-gray-500 hover:text-gray-900 px-3 py-1.5 rounded-lg hover:bg-gray-50 transition-colors">CRM</Link>
             <Link href="/admin/productos" className="text-sm text-gray-500 hover:text-gray-900 px-3 py-1.5 rounded-lg hover:bg-gray-50 transition-colors">Productos</Link>
@@ -100,6 +107,7 @@ export default async function LeadDetailPage({ params }: Props) {
                 {[
                   { label: 'Nombre', value: lead.nombre },
                   { label: 'Empresa', value: lead.empresa },
+                  { label: 'Teléfono', value: lead.telefono },
                   { label: 'Interés', value: lead.interes },
                   { label: 'Valor estimado', value: lead.valor },
                   { label: 'Fuente', value: lead.fuente },
