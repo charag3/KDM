@@ -1,38 +1,22 @@
 @import "tailwindcss";
 
-/* ============================================================
-   KDM Design System — Tailwind v4 CSS-based config
-   Tokens compartidos entre vertical Agrícola (agro) y Offroad
-   ============================================================ */
-
 @theme {
-  /* ===== Colores KDM Tecnologías (Kubota — vertical agrícola) ===== */
-  --color-agro-green:        #3D6B1F;
-  --color-agro-green-dark:   #2A4A14;
-  --color-agro-orange:       #E8620A;
-  --color-agro-white:        #FAFAFA;
-  --color-agro-gray:         #F4F4F0;
+  --color-kdm-green-50: #f0f9f7;
+  --color-kdm-green-600: #17a697;
+  --color-kdm-green-700: #0d7d73;
+  --color-kdm-green-800: #0a6557;
+  --color-kdm-green-900: #073d37;
 
-  /* ===== Colores KDM Offroad (Polaris — vertical offroad) ===== */
-  --color-off-black:         #0F0F0F;
-  --color-off-dark:          #1A1A1A;
-  --color-off-orange:        #F97316;
-  --color-off-white:         #F8FAFC;
+  --color-kdm-orange-50: #fff8f0;
+  --color-kdm-orange-500: #e8622d;
+  --color-kdm-orange-600: #d94821;
+  --color-kdm-orange-700: #b83d1a;
 
-  /* ===== Tipografía ===== */
-  /* next/font/google inyecta variables CSS en <html> */
-  --font-rubik:    var(--font-rubik),    'Rubik',        sans-serif;
-  --font-nunito:   var(--font-nunito),   'Nunito Sans',  sans-serif;
-  --font-grotesk:  var(--font-grotesk),  'Space Grotesk', sans-serif;
-
-  /* ===== Border radius base ===== */
-  --radius-base: 0.5rem;   /* rounded-lg */
-
-  /* ===== Shadows ===== */
-  --shadow-card:  0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-md */
-
-  /* ===== Transitions ===== */
-  --transition-base: all 300ms ease;
+  --color-kdm-neutral-50: #fafaf9;
+  --color-kdm-neutral-100: #f5f5f4;
+  --color-kdm-neutral-200: #e7e5e4;
+  --color-kdm-neutral-500: #78716b;
+  --color-kdm-neutral-600: #57534e;
 }
 
 /* ============================================================
