@@ -28,8 +28,8 @@ export default function WhatsAppButton({
 
   const colorClass =
     variant === 'agro'
-      ? 'bg-agro-green hover:bg-agro-green-dark'
-      : 'bg-off-orange hover:bg-orange-600'
+      ? 'bg-green-600 hover:bg-green-700'
+      : 'bg-kdm-orange-500 hover:bg-kdm-orange-600'
 
   return (
     <a
