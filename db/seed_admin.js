@@ -13,7 +13,7 @@ const pool = new Pool({ connectionString: process.env.DATABASE_URL, ssl: { rejec
 async function seed() {
   const admins = [
     { email: 'somaspace.site@gmail.com', nombre: 'Soma Space', role: 'super_admin', password: 'soma_kdm_2026' },
-    { email: 'mere@kdmtecnologias.com', nombre: 'Mere — KDM', role: 'admin', password: 'kdm_admin_2026' },
+    { email: 'mare@kdmtecnologias.com', nombre: 'Mare — KDM', role: 'admin', password: 'kdm_admin_2026' },
   ]
 
   const client = await pool.connect()

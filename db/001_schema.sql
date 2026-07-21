@@ -7,7 +7,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- ============================================================
 -- TABLA: perfiles_admin
--- Mere (admin) + Soma Space (super_admin)
+-- Mare (admin) + Soma Space (super_admin)
 -- ============================================================
 CREATE TABLE IF NOT EXISTS perfiles_admin (
   id            UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS perfiles_admin (
 
 -- ============================================================
 -- TABLA: equipos_seminuevos
--- Catálogo autogestionable — Mere lo edita desde el admin panel
+-- Catálogo autogestionable — Mare lo edita desde el admin panel
 -- ============================================================
 CREATE TABLE IF NOT EXISTS equipos_seminuevos (
   id                UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -48,7 +48,7 @@ CREATE INDEX IF NOT EXISTS idx_equipos_orden      ON equipos_seminuevos(orden);
 
 -- ============================================================
 -- TABLA: consignaciones
--- Leads del formulario — Mere los gestiona desde admin
+-- Leads del formulario — Mare los gestiona desde admin
 -- ============================================================
 CREATE TABLE IF NOT EXISTS consignaciones (
   id               UUID PRIMARY KEY DEFAULT uuid_generate_v4(),

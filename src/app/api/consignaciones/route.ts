@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
     ]
   )
 
-  // Notificar a Mere vía CallMeBot si está configurado
+  // Notificar a Mare vía CallMeBot si está configurado
   const phone = process.env.CALLMEBOT_PHONE
   const apikey = process.env.CALLMEBOT_APIKEY
   if (phone && apikey) {

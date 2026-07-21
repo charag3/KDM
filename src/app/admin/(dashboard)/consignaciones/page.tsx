@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
-import { ArrowLeft, WhatsappLogo } from '@phosphor-icons/react'
+import { WhatsappLogo, Lock } from '@phosphor-icons/react'
 
 type Consignacion = {
   id: string
@@ -22,15 +22,17 @@ type Consignacion = {
 }
 
 const statusColor: Record<string, string> = {
-  nuevo: 'bg-kdm-orange-500/15 text-kdm-orange-400 border-kdm-orange-500/30',
-  contactado: 'bg-blue-500/15 text-blue-400 border-blue-500/30',
-  cerrado: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30',
-  descartado: 'bg-white/6 text-oxford-400 border-white/10',
+  nuevo: 'bg-kdm-orange-500/10 text-kdm-orange-700 border-kdm-orange-500/30',
+  contactado: 'bg-blue-500/10 text-blue-700 border-blue-500/30',
+  cerrado: 'bg-emerald-500/10 text-emerald-700 border-emerald-500/30',
+  descartado: 'bg-oxford-100 text-oxford-600 border-oxford-200',
 }
 
 const statusLabel: Record<string, string> = {
   nuevo: 'Nuevo', contactado: 'Contactado', cerrado: 'Cerrado', descartado: 'Descartado',
 }
+
+const VENDEDORES = ['Lili', 'Gerardo', 'Cristian', 'Alberto']
 
 export default function AdminConsignaciones() {
   const router = useRouter()
@@ -69,30 +71,55 @@ export default function AdminConsignaciones() {
   const nuevo = leads.filter(l => l.status === 'nuevo').length
 
   return (
-    <div className="min-h-screen bg-oxford-950">
-      <nav className="bg-oxford-900 border-b border-white/6 px-6 h-14 flex items-center gap-4">
-        <a href="/admin/equipos" className="flex items-center gap-1.5 text-sm text-oxford-400 hover:text-white transition-colors">
-          <ArrowLeft size={15} /> Inventario
-        </a>
-        <span className="text-white/10">|</span>
-        <p className="font-rubik font-bold text-white">Consignaciones</p>
-        {nuevo > 0 && (
-          <span className="bg-kdm-orange-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">{nuevo} nuevas</span>
-        )}
-      </nav>
-
+    <div className="min-h-screen bg-oxford-100">
       <div className="max-w-4xl mx-auto px-6 py-8">
+        <div className="flex items-center gap-3 mb-8">
+          <h1 className="font-rubik font-bold text-oxford-950 text-2xl">Consignaciones</h1>
+          {nuevo > 0 && (
+            <span className="bg-kdm-orange-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">{nuevo} nuevas</span>
+          )}
+        </div>
+
+        {/* Scorecard teaser */}
+        <div className="mb-8">
+          <div className="flex items-center gap-2 mb-3">
+            <p className="text-xs font-semibold text-oxford-600 uppercase tracking-wider">Scorecard de vendedores</p>
+            <span className="inline-flex items-center gap-1 text-[11px] font-nunito text-oxford-400 border border-dashed border-oxford-200 rounded-full px-2 py-0.5">
+              <Lock size={10} /> Full Version
+            </span>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {VENDEDORES.map(nombre => (
+              <div
+                key={nombre}
+                title="Leads asignados y ventas cerradas por vendedor — disponible en la Full Version"
+                className="bg-white/60 border border-dashed border-oxford-200 rounded-2xl p-4"
+              >
+                <p className="font-rubik font-semibold text-oxford-600 text-sm mb-2">{nombre}</p>
+                <div className="flex items-baseline gap-1">
+                  <span className="font-rubik font-bold text-xl text-oxford-400">—</span>
+                  <span className="text-[11px] font-nunito text-oxford-400">leads</span>
+                </div>
+                <div className="flex items-baseline gap-1 mt-0.5">
+                  <span className="font-rubik font-bold text-xl text-oxford-400">—</span>
+                  <span className="text-[11px] font-nunito text-oxford-400">cerradas</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {loading ? (
-          <div className="space-y-3">{[...Array(4)].map((_, i) => <div key={i} className="h-20 bg-oxford-800 rounded-xl animate-pulse" />)}</div>
+          <div className="space-y-3">{[...Array(4)].map((_, i) => <div key={i} className="h-20 bg-white border border-oxford-100 rounded-xl animate-pulse" />)}</div>
         ) : leads.length === 0 ? (
-          <div className="text-center py-20 text-oxford-400 font-nunito">No hay consignaciones todavía.</div>
+          <div className="text-center py-20 text-oxford-600 font-nunito">No hay consignaciones todavía.</div>
         ) : (
           <div className="space-y-3">
             {leads.map(lead => (
               <button
                 key={lead.id}
                 onClick={() => openLead(lead)}
-                className="w-full text-left bg-oxford-800 rounded-2xl border border-white/8 hover:border-white/20 p-5 transition-all"
+                className="w-full text-left bg-white rounded-2xl border border-oxford-100 hover:border-kdm-orange-500/30 hover:shadow-sm p-5 transition-all"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1 min-w-0">
@@ -100,12 +127,18 @@ export default function AdminConsignaciones() {
                       <span className={`text-xs font-semibold px-2.5 py-0.5 rounded-full border ${statusColor[lead.status]}`}>
                         {statusLabel[lead.status]}
                       </span>
-                      <span className="text-oxford-400 text-xs font-nunito">
+                      <span className="text-oxford-600 text-xs font-nunito">
                         {new Date(lead.created_at).toLocaleDateString('es-MX')}
                       </span>
+                      <span
+                        title="La asignación automática de vendedor está disponible en la Full Version"
+                        className="inline-flex items-center gap-1 text-[11px] font-nunito text-oxford-400 border border-dashed border-oxford-200 rounded-full px-2 py-0.5"
+                      >
+                        <Lock size={10} /> Vendedor · Full Version
+                      </span>
                     </div>
-                    <p className="font-rubik font-semibold text-white text-sm">{lead.nombre}</p>
-                    <p className="text-oxford-400 text-xs font-nunito mt-0.5">
+                    <p className="font-rubik font-semibold text-oxford-950 text-sm">{lead.nombre}</p>
+                    <p className="text-oxford-600 text-xs font-nunito mt-0.5">
                       Interés: {lead.tractor_interes}
                       {lead.tiene_equipo && lead.marca_modelo && ` · Consigna: ${lead.marca_modelo}`}
                     </p>
@@ -128,11 +161,11 @@ export default function AdminConsignaciones() {
 
       {/* Drawer detalle */}
       {selected && (
-        <div className="fixed inset-0 z-50 bg-black/60 flex items-end md:items-center justify-center p-0 md:p-6">
-          <div className="w-full md:max-w-lg bg-oxford-800 rounded-t-2xl md:rounded-2xl border border-white/10 max-h-[90vh] overflow-y-auto">
-            <div className="sticky top-0 bg-oxford-800 flex items-center justify-between px-6 py-4 border-b border-white/6">
-              <h2 className="font-rubik font-bold text-white">{selected.nombre}</h2>
-              <button onClick={() => setSelected(null)} className="text-oxford-400 hover:text-white">✕</button>
+        <div className="fixed inset-0 z-50 bg-oxford-950/60 flex items-end md:items-center justify-center p-0 md:p-6">
+          <div className="w-full md:max-w-lg bg-white rounded-t-2xl md:rounded-2xl border border-oxford-200 shadow-xl max-h-[90vh] overflow-y-auto">
+            <div className="sticky top-0 bg-white flex items-center justify-between px-6 py-4 border-b border-oxford-100">
+              <h2 className="font-rubik font-bold text-oxford-950">{selected.nombre}</h2>
+              <button onClick={() => setSelected(null)} className="text-oxford-400 hover:text-oxford-950">✕</button>
             </div>
 
             <div className="p-6 space-y-5">
@@ -145,33 +178,42 @@ export default function AdminConsignaciones() {
                   selected.horas_equipo && ['Horas', `${selected.horas_equipo.toLocaleString()} hrs`],
                   selected.precio_esperado && ['Precio esperado', `$${selected.precio_esperado.toLocaleString('es-MX')} MXN`],
                 ].filter(Boolean).map(([label, val]) => (
-                  <div key={String(label)} className="bg-oxford-700 rounded-xl p-3">
-                    <p className="text-xs text-oxford-400 font-nunito mb-0.5">{label}</p>
-                    <p className="text-white font-rubik font-semibold text-sm">{val}</p>
+                  <div key={String(label)} className="bg-oxford-100 rounded-xl p-3">
+                    <p className="text-xs text-oxford-600 font-nunito mb-0.5">{label}</p>
+                    <p className="text-oxford-950 font-rubik font-semibold text-sm">{val}</p>
                   </div>
                 ))}
+                <div
+                  title="Asignación automática por vertical y carga de trabajo — disponible en la Full Version"
+                  className="rounded-xl p-3 border border-dashed border-oxford-200"
+                >
+                  <p className="text-xs text-oxford-400 font-nunito mb-0.5 flex items-center gap-1">
+                    <Lock size={11} /> Vendedor asignado
+                  </p>
+                  <p className="text-oxford-400 font-rubik font-semibold text-sm">Full Version</p>
+                </div>
               </div>
 
               {selected.mensaje && (
                 <div>
-                  <p className="text-xs font-semibold text-oxford-400 mb-1.5">Mensaje del cliente</p>
-                  <p className="text-sm text-oxford-200 font-nunito bg-oxford-700 rounded-xl p-3">{selected.mensaje}</p>
+                  <p className="text-xs font-semibold text-oxford-600 mb-1.5">Mensaje del cliente</p>
+                  <p className="text-sm text-oxford-700 font-nunito bg-oxford-100 rounded-xl p-3">{selected.mensaje}</p>
                 </div>
               )}
 
               <div>
-                <label className="block text-xs font-semibold text-oxford-200 mb-1.5">Notas internas</label>
+                <label className="block text-xs font-semibold text-oxford-700 mb-1.5">Notas internas</label>
                 <textarea
                   rows={3}
                   value={notas}
                   onChange={e => setNotas(e.target.value)}
-                  className="w-full border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white bg-oxford-700 focus:outline-none focus:ring-2 focus:ring-kdm-orange-500 resize-none placeholder-oxford-400"
+                  className="w-full border border-oxford-200 rounded-lg px-3 py-2.5 text-sm text-oxford-950 bg-white focus:outline-none focus:ring-2 focus:ring-kdm-orange-500 resize-none placeholder-oxford-400"
                   placeholder="Notas para el equipo KDM..."
                 />
               </div>
 
               <div>
-                <p className="text-xs font-semibold text-oxford-200 mb-2">Cambiar status</p>
+                <p className="text-xs font-semibold text-oxford-700 mb-2">Cambiar status</p>
                 <div className="grid grid-cols-2 gap-2">
                   {(['nuevo', 'contactado', 'cerrado', 'descartado'] as const).map(s => (
                     <button
@@ -181,7 +223,7 @@ export default function AdminConsignaciones() {
                       className={`py-2 rounded-lg text-xs font-semibold border transition-all disabled:opacity-40 ${
                         selected.status === s
                           ? `${statusColor[s]} cursor-default`
-                          : 'bg-oxford-700 text-oxford-400 border-white/10 hover:border-white/25'
+                          : 'bg-white text-oxford-600 border-oxford-200 hover:border-oxford-400'
                       }`}
                     >
                       {statusLabel[s]}

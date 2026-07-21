@@ -27,7 +27,7 @@ type Equipo = {
   nombre: string
   ano: number
   horas: number
-  precio: number
+  precio: string
   condicion: 'Excelente' | 'Muy buena' | 'Buena' | 'Regular'
   descripcion: string
   imagen_principal: string | null
@@ -61,7 +61,7 @@ function Navbar() {
   return (
     <nav className="sticky top-0 z-40 bg-oxford-900/95 backdrop-blur border-b border-white/6 shadow-sm">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#" className="font-rubik font-bold text-white text-xl tracking-tight">
+        <a href="/" className="font-rubik font-bold text-white text-xl tracking-tight">
           KDM<span className="text-kdm-orange-500">.</span> Seminuevos
         </a>
 
@@ -76,10 +76,10 @@ function Navbar() {
             Consignar
           </a>
           <div className="w-px h-5 bg-white/10 mx-2" />
-          <a href="#" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 px-3 py-2 text-sm text-oxford-400 hover:text-oxford-200 rounded-lg hover:bg-white/6 transition-colors">
+          <a href="https://kdmtecnologias.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 px-3 py-2 text-sm text-oxford-400 hover:text-oxford-200 rounded-lg hover:bg-white/6 transition-colors">
             KDM Tecnologías <ArrowSquareOut size={12} />
           </a>
-          <a href="#" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 px-3 py-2 text-sm text-oxford-400 hover:text-oxford-200 rounded-lg hover:bg-white/6 transition-colors">
+          <a href="https://www.polarismorelia.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 px-3 py-2 text-sm text-oxford-400 hover:text-oxford-200 rounded-lg hover:bg-white/6 transition-colors">
             Polaris Morelia <ArrowSquareOut size={12} />
           </a>
         </div>
@@ -103,8 +103,8 @@ function Navbar() {
           <a onClick={() => setMobileOpen(false)} href="#como-funciona" className="px-3 py-2.5 text-sm font-medium text-oxford-200 rounded-lg hover:bg-white/6">Cómo funciona</a>
           <a onClick={() => setMobileOpen(false)} href="#consignar" className="px-3 py-2.5 text-sm font-medium text-oxford-200 rounded-lg hover:bg-white/6">Consignar</a>
           <div className="border-t border-white/6 mt-2 pt-2 flex flex-col gap-1">
-            <a href="#" target="_blank" rel="noopener noreferrer" className="px-3 py-2.5 text-sm text-oxford-400 rounded-lg hover:bg-white/6">KDM Tecnologías ↗</a>
-            <a href="#" target="_blank" rel="noopener noreferrer" className="px-3 py-2.5 text-sm text-oxford-400 rounded-lg hover:bg-white/6">Polaris Morelia ↗</a>
+            <a href="https://kdmtecnologias.com/" target="_blank" rel="noopener noreferrer" className="px-3 py-2.5 text-sm text-oxford-400 rounded-lg hover:bg-white/6">KDM Tecnologías ↗</a>
+            <a href="https://www.polarismorelia.com/" target="_blank" rel="noopener noreferrer" className="px-3 py-2.5 text-sm text-oxford-400 rounded-lg hover:bg-white/6">Polaris Morelia ↗</a>
           </div>
         </div>
       )}
@@ -178,7 +178,7 @@ function DualPathHero() {
             </p>
             <div className="mt-auto">
               <a
-                href="#"
+                href="https://kdmtecnologias.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-kdm-orange-500 hover:bg-kdm-orange-600 active:scale-[0.98] text-white font-rubik font-semibold rounded-lg transition-all text-sm"
@@ -263,28 +263,38 @@ function ComoFunciona() {
   ]
 
   return (
-    <section id="como-funciona" className="py-20 px-6 bg-oxford-900">
+    <section id="como-funciona" className="py-20 px-6 bg-oxford-100">
       <div className="max-w-6xl mx-auto">
-        <FadeIn className="mb-14">
-          <h2 className="font-rubik font-bold text-3xl text-white mb-2">Así de fácil</h2>
-          <p className="text-oxford-400 font-nunito text-base max-w-sm">
+        <FadeIn className="mb-10">
+          <h2 className="font-rubik font-bold text-3xl text-oxford-950 mb-2">Así de fácil</h2>
+          <p className="text-oxford-600 font-nunito text-base max-w-sm">
             Desde que nos contactas hasta que tu equipo encuentra nuevo dueño.
           </p>
         </FadeIn>
 
-        <div className="grid md:grid-cols-3 gap-0 md:gap-8 relative">
-          <div className="hidden md:block absolute top-7 left-[calc(33.33%+24px)] right-[calc(33.33%+24px)] h-px bg-white/6 z-0" />
+        <FadeIn delay={0.05} className="relative rounded-2xl overflow-hidden mb-14 aspect-[21/9] md:aspect-[3/1]">
+          <Image
+            src="https://images.pexels.com/photos/974314/pexels-photo-974314.jpeg?auto=compress&cs=tinysrgb&w=1600"
+            alt="Técnico KDM revisando un tractor en el taller"
+            fill
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-oxford-950/50 via-transparent to-transparent" />
+        </FadeIn>
+
+        <div className="grid md:grid-cols-3 gap-8">
           {pasos.map((paso, i) => (
             <FadeIn key={paso.titulo} delay={i * 0.1}>
-              <div className="relative py-8 md:py-0 border-t border-white/6 md:border-none first:border-none">
-                <div className="flex items-center gap-4 mb-4 md:mb-5">
-                  <div className="relative z-10 w-14 h-14 rounded-2xl bg-kdm-orange-500/10 flex items-center justify-center shrink-0 border border-kdm-orange-500/20">
+              <div className="relative">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-14 h-14 rounded-2xl bg-kdm-orange-500/10 flex items-center justify-center shrink-0 border border-kdm-orange-500/20">
                     <paso.Icon size={24} weight="duotone" className="text-kdm-orange-500" />
                   </div>
-                  <span className="font-rubik font-bold text-3xl text-white/10 leading-none select-none">0{i + 1}</span>
+                  <span className="font-rubik font-bold text-3xl text-oxford-950/10 leading-none select-none">0{i + 1}</span>
                 </div>
-                <h3 className="font-rubik font-bold text-white text-lg mb-2">{paso.titulo}</h3>
-                <p className="font-nunito text-oxford-400 text-sm leading-relaxed max-w-[260px]">{paso.desc}</p>
+                <h3 className="font-rubik font-bold text-oxford-950 text-lg mb-2">{paso.titulo}</h3>
+                <p className="font-nunito text-oxford-600 text-sm leading-relaxed max-w-[260px]">{paso.desc}</p>
               </div>
             </FadeIn>
           ))}
@@ -297,10 +307,10 @@ function ComoFunciona() {
 // ─── Inventario ───────────────────────────────────────────────────────────────
 
 const condicionColor: Record<string, string> = {
-  Excelente: 'bg-emerald-500/15 text-emerald-400',
-  'Muy buena': 'bg-blue-500/15 text-blue-400',
-  Buena: 'bg-yellow-500/15 text-yellow-400',
-  Regular: 'bg-white/10 text-oxford-400',
+  Excelente: 'bg-kdm-orange-500 text-white',
+  'Muy buena': 'bg-oxford-950/85 text-white',
+  Buena: 'bg-oxford-950/85 text-white',
+  Regular: 'bg-oxford-950/85 text-white',
 }
 
 function Inventario() {
@@ -326,12 +336,12 @@ function Inventario() {
   ]
 
   return (
-    <section id="inventario" className="py-20 px-6 bg-oxford-950">
+    <section id="inventario" className="py-20 px-6 bg-oxford-100">
       <div className="max-w-6xl mx-auto">
         <FadeIn className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-10">
           <div>
-            <h2 className="font-rubik font-bold text-3xl text-white mb-1">Equipo disponible</h2>
-            <p className="font-nunito text-oxford-400 text-sm">Maquinaria verificada por técnicos KDM</p>
+            <h2 className="font-rubik font-bold text-3xl text-oxford-950 mb-1">Equipo disponible</h2>
+            <p className="font-nunito text-oxford-600 text-sm">Maquinaria verificada por técnicos KDM</p>
           </div>
           <div className="flex gap-2">
             {filtros.map(f => (
@@ -341,7 +351,7 @@ function Inventario() {
                 className={`px-4 py-2 rounded-lg text-xs font-semibold border transition-colors ${
                   filtro === f.key
                     ? 'bg-kdm-orange-500 text-white border-kdm-orange-500'
-                    : 'bg-oxford-800 text-oxford-400 border-white/10 hover:border-white/20'
+                    : 'bg-white text-oxford-600 border-oxford-200 hover:border-oxford-400/50'
                 }`}
               >
                 {f.label}
@@ -353,12 +363,12 @@ function Inventario() {
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[...Array(6)].map((_, i) => (
-              <div key={i} className="rounded-2xl bg-oxford-800 border border-white/6 overflow-hidden animate-pulse">
-                <div className="aspect-video bg-oxford-700" />
+              <div key={i} className="rounded-2xl bg-white border border-oxford-100 overflow-hidden animate-pulse">
+                <div className="aspect-video bg-oxford-100" />
                 <div className="p-5 space-y-3">
-                  <div className="h-4 bg-oxford-700 rounded w-3/4" />
-                  <div className="h-3 bg-oxford-700 rounded w-1/2" />
-                  <div className="h-8 bg-oxford-700 rounded mt-4" />
+                  <div className="h-4 bg-oxford-100 rounded w-3/4" />
+                  <div className="h-3 bg-oxford-100 rounded w-1/2" />
+                  <div className="h-8 bg-oxford-100 rounded mt-4" />
                 </div>
               </div>
             ))}
@@ -369,8 +379,8 @@ function Inventario() {
               const waMsg = encodeURIComponent(`Hola, me interesa el ${equipo.nombre} ${equipo.ano}. ¿Sigue disponible?`)
               return (
                 <FadeIn key={equipo.id} delay={i * 0.06}>
-                  <div className="bg-oxford-800 rounded-2xl border border-white/8 overflow-hidden hover:border-white/20 hover:-translate-y-0.5 transition-all duration-200 flex flex-col h-full">
-                    <Link href={`/equipo/${equipo.id}`} className="relative block aspect-video overflow-hidden bg-oxford-700">
+                  <div className="bg-white rounded-2xl border border-oxford-100 overflow-hidden hover:border-kdm-orange-500/30 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-oxford-950/5 transition-all duration-200 flex flex-col h-full">
+                    <Link href={`/equipo/${equipo.id}`} className="relative block aspect-video overflow-hidden bg-oxford-100">
                       {equipo.imagen_principal ? (
                         <Image
                           src={equipo.imagen_principal}
@@ -380,7 +390,7 @@ function Inventario() {
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         />
                       ) : (
-                        <div className="absolute inset-0 flex items-center justify-center text-oxford-600">
+                        <div className="absolute inset-0 flex items-center justify-center text-oxford-400">
                           <svg className="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                         </div>
                       )}
@@ -388,7 +398,7 @@ function Inventario() {
                         {equipo.condicion}
                       </span>
                       {equipo.verificado_kdm && (
-                        <span className="absolute top-3 right-3 text-xs font-semibold px-2 py-1 rounded-full bg-kdm-orange-500/20 text-kdm-orange-400 border border-kdm-orange-500/30">
+                        <span className="absolute top-3 right-3 text-xs font-semibold px-2 py-1 rounded-full bg-kdm-orange-500/90 text-white">
                           ✓ KDM
                         </span>
                       )}
@@ -396,11 +406,11 @@ function Inventario() {
 
                     <div className="p-5 flex flex-col flex-1">
                       <Link href={`/equipo/${equipo.id}`} className="group">
-                        <h3 className="font-rubik font-semibold text-white text-base group-hover:text-kdm-orange-400 transition-colors">
+                        <h3 className="font-rubik font-semibold text-oxford-950 text-base group-hover:text-kdm-orange-600 transition-colors">
                           {equipo.nombre}
                         </h3>
                       </Link>
-                      <div className="flex gap-3 mt-1.5 text-xs text-oxford-400 font-nunito">
+                      <div className="flex gap-3 mt-1.5 text-xs text-oxford-600 font-nunito">
                         <span>Año {equipo.ano}</span>
                         <span>·</span>
                         <span>{equipo.horas.toLocaleString('es-MX')} hrs</span>
@@ -412,19 +422,19 @@ function Inventario() {
                         )}
                       </div>
 
-                      <div className="flex items-center justify-between mt-auto pt-4 border-t border-white/6">
-                        <span className="font-rubik font-bold text-kdm-orange-400 text-lg">
-                          ${equipo.precio.toLocaleString('es-MX')} <span className="text-xs font-normal text-oxford-400">MXN</span>
+                      <div className="flex items-center justify-between mt-auto pt-4 border-t border-oxford-100">
+                        <span className="font-rubik font-bold text-kdm-orange-600 text-lg">
+                          ${Number(equipo.precio).toLocaleString('es-MX')} <span className="text-xs font-normal text-oxford-600">MXN</span>
                         </span>
                         <div className="flex gap-2">
                           <Link
                             href={`/equipo/${equipo.id}`}
-                            className="inline-flex items-center gap-1 text-xs font-semibold px-3 py-2 rounded-lg border border-white/12 text-oxford-400 hover:border-white/25 hover:text-oxford-200 transition-colors"
+                            className="inline-flex items-center gap-1 text-xs font-semibold px-3 py-2 rounded-lg border border-kdm-orange-500/40 text-kdm-orange-700 hover:bg-kdm-orange-500/10 hover:border-kdm-orange-500 transition-colors"
                           >
                             Ver ficha
                           </Link>
                           <a
-                            href={`https://wa.me/524430000000?text=${waMsg}`}
+                            href={`https://wa.me/527551019938?text=${waMsg}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-1.5 bg-green-600 hover:bg-green-700 active:scale-[0.97] text-white text-xs font-semibold px-3 py-2 rounded-lg transition-all"
@@ -459,27 +469,38 @@ function TrustSection() {
   ]
 
   return (
-    <section className="py-20 px-6 bg-oxford-900">
-      <div className="max-w-6xl mx-auto">
-        <FadeIn className="mb-12">
-          <h2 className="font-rubik font-bold text-3xl text-white mb-2">¿Por qué comprar seminuevo con KDM?</h2>
-          <p className="text-oxford-400 font-nunito text-base max-w-sm">Distribuidores autorizados. Revisión técnica. Sin riesgo.</p>
-        </FadeIn>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {cards.map((c, i) => (
-            <FadeIn key={c.titulo} delay={i * 0.08}>
-              <div className="flex gap-5 p-6 rounded-2xl border border-white/8 hover:border-white/15 hover:bg-white/2 transition-all bg-oxford-800">
-                <div className="shrink-0 w-11 h-11 rounded-xl bg-kdm-orange-500/10 border border-kdm-orange-500/20 flex items-center justify-center">
-                  <c.Icon size={20} weight="duotone" className="text-kdm-orange-500" />
+    <section className="py-20 px-6 bg-white">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <FadeIn className="mb-8">
+            <h2 className="font-rubik font-bold text-3xl text-oxford-950 mb-2">¿Por qué comprar seminuevo con KDM?</h2>
+            <p className="text-oxford-600 font-nunito text-base max-w-sm">Distribuidores autorizados. Revisión técnica. Sin riesgo.</p>
+          </FadeIn>
+          <div className="grid grid-cols-1 gap-4">
+            {cards.map((c, i) => (
+              <FadeIn key={c.titulo} delay={i * 0.08}>
+                <div className="flex gap-5 p-5 rounded-2xl border border-oxford-100 hover:border-kdm-orange-500/30 hover:bg-oxford-100/50 transition-all bg-white">
+                  <div className="shrink-0 w-11 h-11 rounded-xl bg-kdm-orange-500/10 border border-kdm-orange-500/20 flex items-center justify-center">
+                    <c.Icon size={20} weight="duotone" className="text-kdm-orange-500" />
+                  </div>
+                  <div>
+                    <h3 className="font-rubik font-bold text-oxford-950 text-base mb-1">{c.titulo}</h3>
+                    <p className="font-nunito text-oxford-600 text-sm leading-relaxed">{c.desc}</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-rubik font-bold text-white text-base mb-1">{c.titulo}</h3>
-                  <p className="font-nunito text-oxford-400 text-sm leading-relaxed">{c.desc}</p>
-                </div>
-              </div>
-            </FadeIn>
-          ))}
+              </FadeIn>
+            ))}
+          </div>
         </div>
+        <FadeIn delay={0.1} className="relative rounded-2xl overflow-hidden aspect-[4/5] md:aspect-square">
+          <Image
+            src="https://images.pexels.com/photos/35510874/pexels-photo-35510874.jpeg?auto=compress&cs=tinysrgb&w=1200"
+            alt="Tractor Kubota verificado por KDM"
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover"
+          />
+        </FadeIn>
       </div>
     </section>
   )
@@ -513,7 +534,7 @@ function MarcasSection() {
                   </li>
                 ))}
               </ul>
-              <a href="#" target="_blank" rel="noopener noreferrer"
+              <a href="https://kdmtecnologias.com/" target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 font-rubik font-semibold text-sm px-5 py-2.5 rounded-lg text-white bg-kdm-orange-500 hover:bg-kdm-orange-600 transition-colors">
                 Ver tractores Kubota <ArrowSquareOut size={14} />
               </a>
@@ -534,7 +555,7 @@ function MarcasSection() {
                   </li>
                 ))}
               </ul>
-              <a href="#" target="_blank" rel="noopener noreferrer"
+              <a href="https://www.polarismorelia.com/" target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 font-rubik font-semibold text-sm px-5 py-2.5 rounded-lg text-white bg-oxford-700 hover:bg-oxford-600 border border-white/10 transition-colors">
                 Ver vehículos Polaris <ArrowSquareOut size={14} />
               </a>
@@ -779,8 +800,8 @@ function Footer() {
           <div>
             <p className="font-rubik font-semibold text-oxford-400 text-xs uppercase tracking-wider mb-4">Nuestros portales</p>
             <div className="space-y-2 font-nunito text-sm text-oxford-400">
-              <a href="#" target="_blank" rel="noopener noreferrer" className="block hover:text-oxford-200 transition-colors">KDM Tecnologías ↗</a>
-              <a href="#" target="_blank" rel="noopener noreferrer" className="block hover:text-oxford-200 transition-colors">Polaris Morelia ↗</a>
+              <a href="https://kdmtecnologias.com/" target="_blank" rel="noopener noreferrer" className="block hover:text-oxford-200 transition-colors">KDM Tecnologías ↗</a>
+              <a href="https://www.polarismorelia.com/" target="_blank" rel="noopener noreferrer" className="block hover:text-oxford-200 transition-colors">Polaris Morelia ↗</a>
             </div>
           </div>
         </div>

@@ -19,9 +19,7 @@ export default function WhatsAppButton({
   variant = 'agro',
   message = 'Hola, me gustaría recibir información.',
 }: WhatsAppButtonProps) {
-  // TODO: leer NEXT_PUBLIC_WHATSAPP_NUMBER desde env
-  // const phone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER
-  const phone = '521XXXXXXXXXX' // placeholder — reemplazar con env var real
+  const phone = '527551019938' // Mare — KDM Seminuevos
 
   const encodedMessage = encodeURIComponent(message)
   const href = `https://wa.me/${phone}?text=${encodedMessage}`
