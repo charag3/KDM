@@ -177,7 +177,7 @@ export default function AdminConsignaciones() {
                   selected.ano_equipo && ['Año', String(selected.ano_equipo)],
                   selected.horas_equipo && ['Horas', `${selected.horas_equipo.toLocaleString()} hrs`],
                   selected.precio_esperado && ['Precio esperado', `$${selected.precio_esperado.toLocaleString('es-MX')} MXN`],
-                ].filter(Boolean).map(([label, val]) => (
+                ].filter((row): row is string[] => Boolean(row)).map(([label, val]) => (
                   <div key={String(label)} className="bg-oxford-100 rounded-xl p-3">
                     <p className="text-xs text-oxford-600 font-nunito mb-0.5">{label}</p>
                     <p className="text-oxford-950 font-rubik font-semibold text-sm">{val}</p>
